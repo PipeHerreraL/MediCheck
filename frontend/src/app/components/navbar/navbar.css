@@ -59,3 +59,16 @@
   background: #00796b;
   border-radius: 2px;
 }
+
+@media (max-width: 860px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+}
