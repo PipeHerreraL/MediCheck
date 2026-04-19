@@ -1,0 +1,42 @@
+<div class="detail-container">
+  <div class="back-nav">
+    <a routerLink="/" class="btn-back">⬅ Volver a la búsqueda</a>
+  </div>
+
+  <div *ngIf="loading()" class="loading-state">
+    <div class="pulse"></div>
+    <p>Cargando información médica oficial...</p>
+  </div>
+
+  <div *ngIf="error()" class="error-banner">
+    <span class="error-icon">⚠️</span>
+    <p>{{ error() }}</p>
+  </div>
+
+  <div *ngIf="!loading() && !error()" class="content">
+    <header class="detail-header">
+      <span class="badge">Código ICD-10: {{ icdCode() }}</span>
+      <h1>Información de Salud</h1>
+      <p>Artículos y datos recopilados por la Biblioteca Nacional de Medicina (MedlinePlus).</p>
+    </header>
+
+    <div class="articles-list" *ngIf="articles().length > 0">
+      <article *ngFor="let article of articles()" class="info-article">
+        <h2>{{ article.title }}</h2>
+        <div class="article-meta">
+          <span class="source">Fuente: {{ article.source }}</span>
+          <span class="date" *ngIf="article.updated">Actualizado: {{ article.updated | date:'mediumDate' }}</span>
+        </div>
+        <p class="summary">{{ article.summary }}</p>
+        <a *ngIf="article.link" [href]="article.link" target="_blank" class="external-link">
+          Leer artículo completo en MedlinePlus ↗
+        </a>
+      </article>
+    </div>
+
+    <div class="no-data" *ngIf="articles().length === 0">
+      <div class="empty-icon">📂</div>
+      <p>No se encontró información detallada adicional para el código <strong>{{ icdCode() }}</strong> en MedlinePlus Connect.</p>
+    </div>
+  </div>
+</div>

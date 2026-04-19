@@ -1,0 +1,63 @@
+<div class="drug-container">
+  <div class="header">
+    <h1>Consulta de Medicamentos</h1>
+    <p>Busca información sobre seguridad y reacciones adversas reportadas a la FDA.</p>
+  </div>
+
+  <div class="search-box">
+    <div class="input-group">
+      <span class="prefix">💊</span>
+      <input 
+        type="text" 
+        [ngModel]="drugTerm()" 
+        (ngModelChange)="drugTerm.set($event)"
+        (keyup.enter)="onSearch()"
+        placeholder="Nombre del medicamento (ej: aspirin, ibuprofen...)"
+        class="drug-input">
+      <button (click)="onSearch()" class="btn-search" [disabled]="loading()">
+        {{ loading() ? 'Consultando...' : 'Buscar Datos' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Estados -->
+  <div *ngIf="loading()" class="loading-overlay">
+    <div class="loader"></div>
+    <p>Conectando con la base de datos de la FDA...</p>
+  </div>
+
+  <div *ngIf="error()" class="error-box">
+    {{ error() }}
+  </div>
+
+  <!-- Resultados -->
+  <div *ngIf="!loading() && hasSearched()" class="results-area">
+    <div class="results-header" *ngIf="reactions().length > 0">
+      <h2>Reacciones más reportadas para: <span>{{ drugTerm() }}</span></h2>
+      <p class="disclaimer">⚠️ Esta información se basa en reportes de pacientes y profesionales. No sustituye el consejo médico.</p>
+    </div>
+
+    <div class="reactions-list" *ngIf="reactions().length > 0">
+      <div *ngFor="let item of reactions()" class="reaction-item">
+        <div class="reaction-rank">#{{ item.rank }}</div>
+        <div class="reaction-name">{{ item.reaction }}</div>
+        <div class="reaction-bar-container">
+          <div class="reaction-bar" [style.width.%]="(item.count / reactions()[0].count) * 100"></div>
+        </div>
+        <div class="reaction-count">{{ item.count | number }} reportes</div>
+      </div>
+    </div>
+
+    <div class="no-results" *ngIf="reactions().length === 0">
+      <p>No se encontraron datos de seguridad pública para "<strong>{{ drugTerm() }}</strong>". Verifique el nombre en inglés.</p>
+    </div>
+  </div>
+
+  <!-- Guía inicial -->
+  <div class="info-footer" *ngIf="!hasSearched() && !loading()">
+    <div class="info-card">
+      <h4>¿Qué datos mostramos?</h4>
+      <p>Analizamos miles de reportes del sistema de farmacovigilancia de la FDA de EE.UU.</p>
+    </div>
+  </div>
+</div>

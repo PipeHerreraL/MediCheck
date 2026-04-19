@@ -1,0 +1,68 @@
+<div class="search-container">
+  <div class="header">
+    <h1>¿Cómo te sientes hoy?</h1>
+    <p>Ingresa tus síntomas y te ayudaremos a identificar posibles condiciones médicas.</p>
+  </div>
+
+  <div class="search-bar">
+    <input 
+      type="text" 
+      [ngModel]="searchTerm()" 
+      (ngModelChange)="searchTerm.set($event)"
+      (keyup.enter)="onSearch()"
+      placeholder="Ej: cough, headache, fever..."
+      class="search-input">
+    <button (click)="onSearch()" class="search-button" [disabled]="loading()">
+      {{ loading() ? 'Buscando...' : 'Consultar' }}
+    </button>
+  </div>
+  <p class="search-tip">💡 <strong>Tip:</strong> Prueba buscando en inglés para obtener resultados más precisos del NIH (ej: <em>headache</em> en lugar de <em>dolor de cabeza</em>).</p>
+
+  <div *ngIf="loading()" class="spinner-container">
+    <div class="spinner"></div>
+    <p>Analizando datos médicos...</p>
+  </div>
+
+  <div *ngIf="error()" class="error-msg">
+    {{ error() }}
+  </div>
+
+  <div *ngIf="!loading() && hasSearched()" class="results-container">
+    <h2 *ngIf="results().length > 0">Resultados encontrados ({{ results().length }})</h2>
+    
+    <div class="results-grid">
+      <div *ngFor="let condition of results()" class="result-card">
+        <div class="card-body">
+          <span class="icd-tag">{{ condition.icd10Code || 'ICD-10' }}</span>
+          <h3>{{ condition.name }}</h3>
+          <p *ngIf="condition.infoTitle">{{ condition.infoTitle }}</p>
+        </div>
+        <div class="card-footer">
+          <a [routerLink]="['/detail', condition.icd10Code]" class="btn-detail">Ver Detalles ➔</a>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="results().length === 0" class="no-results">
+      <p>No se encontraron resultados específicos para su búsqueda. Intente con términos más generales.</p>
+    </div>
+  </div>
+
+  <div *ngIf="!hasSearched() && !loading()" class="search-guide">
+    <div class="guide-item">
+      <span class="icon">🔍</span>
+      <h4>Búsqueda Directa</h4>
+      <p>Nuestra base de datos contiene más de 2,400 condiciones médicas oficiales.</p>
+    </div>
+    <div class="guide-item">
+      <span class="icon">⚕️</span>
+      <h4>Fuentes Oficiales</h4>
+      <p>Datos sincronizados con los Institutos Nacionales de Salud (NIH).</p>
+    </div>
+    <div class="guide-item">
+      <span class="icon">🔒</span>
+      <h4>Privacidad</h4>
+      <p>Tus búsquedas son anónimas y no se guardan datos personales.</p>
+    </div>
+  </div>
+</div>
