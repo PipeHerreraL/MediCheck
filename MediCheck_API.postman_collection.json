@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "8d7de92f-c7b0-4d3d-8b6e-1a38689fd964",
+		"name": "MediCheck API - Universidad de Manizales",
+		"description": "Colección de APIs médicas integradas para el proyecto de Programación Orientada a Sitios Web. Incluye NIH, OpenFDA y MedlinePlus.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sistema",
+			"item": [
+				{
+					"name": "Verificar Estado de API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Estado Exitoso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"name\": \"MediCheck API\",\n    \"version\": \"1.1.0\",\n    \"status\": \"online\",\n    \"endpoints\": {\n        \"conditionsSearch\": \"/api/conditions/search?terms=fever\",\n        \"conditionDetail\": \"/api/conditions/R50.9/info\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Condiciones y Síntomas",
+			"item": [
+				{
+					"name": "Buscar Condiciones (NIH)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/conditions/search?terms=headache",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"conditions",
+								"search"
+							],
+							"query": [
+								{
+									"key": "terms",
+									"value": "headache"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Resultados para Headache",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"totalResults\": 5,\n    \"data\": [\n        {\n            \"id\": \"2179\",\n            \"name\": \"Headache - cluster\",\n            \"icd10Code\": \"G44.009\",\n            \"infoUrl\": \"http://www.nlm.nih.gov/medlineplus/ency/article/000786.htm\"\n        },\n        {\n            \"id\": \"8183\",\n            \"name\": \"Headache - chronic tension\",\n            \"icd10Code\": \"G44.229\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Detalle Médico (MedlinePlus)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/conditions/J11.1/info",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"conditions",
+								"J11.1",
+								"info"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Info Gripe (J11.1)",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"icdCode\": \"J11.1\",\n    \"count\": 1,\n    \"data\": [\n        {\n            \"title\": \"Influenza\",\n            \"summary\": \"La gripe es una infección respiratoria causada por virus...\",\n            \"source\": \"MedlinePlus\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Medicamentos",
+			"item": [
+				{
+					"name": "Top Reacciones (FDA)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/drugs/search?terms=aspirin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"drugs",
+								"search"
+							],
+							"query": [
+								{
+									"key": "terms",
+									"value": "aspirin"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Reacciones Aspirina",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"drug\": \"aspirin\",\n    \"count\": 5,\n    \"data\": [\n        { \"rank\": 1, \"reaction\": \"NAUSEA\", \"count\": 45000 },\n        { \"rank\": 2, \"reaction\": \"VOMITING\", \"count\": 32000 }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api"
+		}
+	]
+}
