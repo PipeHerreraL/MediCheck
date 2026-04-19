@@ -1,0 +1,162 @@
+.landing {
+  padding: 2.5rem 0 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  color: #00796b;
+  background: #e0f2f1;
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hero h1 {
+  color: #2c3e50;
+  font-size: 2.4rem;
+  margin: 1rem auto;
+  max-width: 760px;
+  line-height: 1.2;
+}
+
+.hero p {
+  color: #607d8b;
+  max-width: 700px;
+  margin: 0 auto 1.8rem;
+  font-size: 1.05rem;
+}
+
+.cta-button,
+.cta-link {
+  display: inline-block;
+  background: #00796b;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button {
+  padding: 0.8rem 1.6rem;
+}
+
+.cta-link {
+  padding: 0.75rem 1.4rem;
+}
+
+.cta-button:hover,
+.cta-link:hover {
+  background: #004d40;
+  transform: translateY(-1px);
+}
+
+.api-section {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.api-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #edf2f4;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+}
+
+.api-icon {
+  width: fit-content;
+  color: #00796b;
+  background: #e0f2f1;
+  border-radius: 10px;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.api-card h2 {
+  margin: 0.9rem 0 0.6rem;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.api-card p {
+  color: #546e7a;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.about {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.about h2 {
+  color: #2c3e50;
+  margin-bottom: 0.7rem;
+}
+
+.about p {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #546e7a;
+  line-height: 1.65;
+}
+
+.cta-panel {
+  margin: 2.5rem auto 0;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e9eef2;
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+}
+
+.cta-panel h3 {
+  margin: 0 0 0.5rem;
+  color: #2c3e50;
+}
+
+.cta-panel p {
+  color: #607d8b;
+  margin: 0 0 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .api-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .landing {
+    padding-top: 1.8rem;
+  }
+
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+}
