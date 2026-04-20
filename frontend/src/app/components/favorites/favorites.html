@@ -1,0 +1,116 @@
+<section class="favorites-container">
+  <header class="header">
+    <h1>Mis Favoritos</h1>
+    <p>Guarda y organiza tus búsquedas médicas para consultarlas rápidamente.</p>
+  </header>
+
+  <div class="status-box error" *ngIf="error()">{{ error() }}</div>
+  <div class="status-box success" *ngIf="success()">{{ success() }}</div>
+
+  <article class="create-card">
+    <h2>Agregar favorito</h2>
+    <div class="form-grid">
+      <label class="field">
+        <span>Categoría</span>
+        <select [ngModel]="createCategoriaId()" (ngModelChange)="createCategoriaId.set($event)">
+          <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+            {{ categoria.nombre }}
+          </option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Término de búsqueda</span>
+        <input
+          type="text"
+          [ngModel]="createTermino()"
+          (ngModelChange)="createTermino.set($event)"
+          placeholder="Ej: ibuprofeno, dolor de cabeza..."
+        >
+      </label>
+
+      <label class="field full">
+        <span>Notas (opcional)</span>
+        <textarea
+          rows="3"
+          [ngModel]="createNotas()"
+          (ngModelChange)="createNotas.set($event)"
+          placeholder="Agrega contexto útil para recordar este favorito..."
+        ></textarea>
+      </label>
+    </div>
+
+    <button class="btn-primary" (click)="createFavorito()" [disabled]="creating()">
+      {{ creating() ? 'Guardando...' : 'Guardar favorito' }}
+    </button>
+  </article>
+
+  <section class="list-section">
+    <div class="loading-box" *ngIf="loading()">
+      <div class="loader"></div>
+      <p>Cargando favoritos...</p>
+    </div>
+
+    <div class="empty-box" *ngIf="!loading() && hasLoaded() && favoritos().length === 0">
+      <p>Aún no tienes favoritos guardados. Crea el primero desde aquí o desde las vistas de búsqueda.</p>
+    </div>
+
+    <div class="favorites-list" *ngIf="!loading() && favoritos().length > 0">
+      <article class="favorite-item" *ngFor="let favorito of favoritos()">
+        <div class="item-header">
+          <span class="chip">{{ favorito.categoria_nombre || 'Sin categoría' }}</span>
+          <span class="date">{{ favorito.fecha_creacion | date: 'mediumDate' }}</span>
+        </div>
+
+        <div *ngIf="editingId() !== favorito.id" class="item-content">
+          <h3>{{ favorito.termino_busqueda }}</h3>
+          <p *ngIf="favorito.notas_usuario">{{ favorito.notas_usuario }}</p>
+          <p *ngIf="!favorito.notas_usuario" class="muted">Sin notas.</p>
+        </div>
+
+        <div *ngIf="editingId() === favorito.id" class="edit-form">
+          <label class="field">
+            <span>Término</span>
+            <input
+              type="text"
+              [ngModel]="editTermino()"
+              (ngModelChange)="editTermino.set($event)"
+            >
+          </label>
+          <label class="field">
+            <span>Notas</span>
+            <textarea
+              rows="3"
+              [ngModel]="editNotas()"
+              (ngModelChange)="editNotas.set($event)"
+            ></textarea>
+          </label>
+        </div>
+
+        <div class="item-actions">
+          <ng-container *ngIf="editingId() !== favorito.id">
+            <button class="btn-secondary" (click)="startEdit(favorito)">Editar</button>
+            <button
+              class="btn-danger"
+              (click)="deleteFavorito(favorito.id)"
+              [disabled]="deletingId() === favorito.id"
+            >
+              {{ deletingId() === favorito.id ? 'Eliminando...' : 'Eliminar' }}
+            </button>
+          </ng-container>
+
+          <ng-container *ngIf="editingId() === favorito.id">
+            <button
+              class="btn-primary"
+              (click)="saveEdit(favorito.id)"
+              [disabled]="savingId() === favorito.id"
+            >
+              {{ savingId() === favorito.id ? 'Guardando...' : 'Guardar cambios' }}
+            </button>
+            <button class="btn-secondary" (click)="cancelEdit()">Cancelar</button>
+          </ng-container>
+        </div>
+      </article>
+    </div>
+  </section>
+</section>
