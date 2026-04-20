@@ -159,7 +159,7 @@
 			]
 		},
 		{
-			"name": "Favoritos (PHP)",
+			"name": "Favoritos (Vía Node Proxy)",
 			"item": [
 				{
 					"name": "1. Crear Favorito",
@@ -176,14 +176,12 @@
 							"raw": "{\n    \"usuario_id\": 1,\n    \"categoria_id\": 3,\n    \"termino_busqueda\": \"migraña severa\",\n    \"notas_usuario\": \"Buscar más en NIH\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost/php_backend/api_favoritos.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/favoritos",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
 							"path": [
-								"php_backend",
-								"api_favoritos.php"
+								"favoritos"
 							]
 						}
 					}
@@ -194,14 +192,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/php_backend/api_favoritos.php?usuario_id=1",
-							"protocol": "http",
+							"raw": "{{base_url}}/favoritos?usuario_id=1",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
 							"path": [
-								"php_backend",
-								"api_favoritos.php"
+								"favoritos"
 							],
 							"query": [
 								{
@@ -227,20 +223,13 @@
 							"raw": "{\n    \"notas_usuario\": \"Actualicé mi nota usando PUT\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost/php_backend/api_favoritos.php?id=1",
-							"protocol": "http",
+							"raw": "{{base_url}}/favoritos/1",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
 							"path": [
-								"php_backend",
-								"api_favoritos.php"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"favoritos",
+								"1"
 							]
 						}
 					}
@@ -251,20 +240,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/php_backend/api_favoritos.php?id=1",
-							"protocol": "http",
+							"raw": "{{base_url}}/favoritos/1",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
 							"path": [
-								"php_backend",
-								"api_favoritos.php"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"favoritos",
+								"1"
 							]
 						}
 					}

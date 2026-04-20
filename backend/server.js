@@ -28,6 +28,7 @@ const errorHandler = require('./middleware/errorHandler');
 // Importar rutas
 const conditionsRoutes = require('./routes/conditions.routes');
 const drugsRoutes = require('./routes/drugs.routes');
+const favoritosRoutes = require('./routes/favoritos.routes');
 
 // Inicializar Express
 const app = express();
@@ -38,7 +39,7 @@ const app = express();
 
 app.use(cors({
   origin: ['http://localhost:4200', 'http://localhost:4000'],
-  methods: ['GET'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
@@ -82,6 +83,7 @@ app.get('/api/', getApiInfo);
 // Registrar rutas
 app.use('/api/conditions', conditionsRoutes);
 app.use('/api/drugs', drugsRoutes);
+app.use('/api/favoritos', favoritosRoutes);
 
 // Ruta 404
 app.use((req, res) => {
@@ -98,17 +100,31 @@ app.use(errorHandler);
 // Iniciar servidor
 // ============================================
 
-app.listen(config.port, () => {
+const axios = require('axios');
+
+app.listen(config.port, async () => {
+  let phpStatus = '🔴 OFFLINE';
+  try {
+      await axios.get(config.phpBackendUrl, { timeout: 2000 });
+      phpStatus = '🟢 ONLINE';
+  } catch (error) {
+      if (error.response && error.response.status === 400) {
+          // El script PHP está vivo, pero se quejó de que faltan parámetros
+          phpStatus = '🟢 ONLINE';
+      }
+  }
+
   console.log('');
   console.log('╔══════════════════════════════════════════════════════╗');
   console.log('║             🏥  MediCheck API Server                ║');
   console.log('╠══════════════════════════════════════════════════════╣');
-  console.log(`║  Puerto:  http://localhost:${config.port}                      ║`);
+  console.log(`║  Puerto:  http://localhost:${config.port.toString().padEnd(20)}  ║`);
   console.log('╠══════════════════════════════════════════════════════╣');
   console.log('║  ✅ APIs Gratuitas Activas:                          ║');
   console.log('║     - NIH Clinical Tables (Búsqueda)                 ║');
   console.log('║     - OpenFDA (Medicamentos)                         ║');
   console.log('║     - MedlinePlus (Detalles Médicos)                 ║');
+  console.log(`║     - PHP Favoritos Backend: ${phpStatus.padEnd(23)} ║`);
   console.log('╚══════════════════════════════════════════════════════╝');
   console.log('');
 });
