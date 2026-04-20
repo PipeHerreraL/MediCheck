@@ -16,6 +16,15 @@
       {{ loading() ? 'Buscando...' : 'Consultar' }}
     </button>
   </div>
+
+  <div class="quick-actions">
+    <button class="btn-favorite" (click)="addTermToFavorites()" [disabled]="favoriteLoading()">
+      {{ favoriteLoading() ? 'Guardando...' : '⭐ Guardar término en favoritos' }}
+    </button>
+  </div>
+  <p class="favorite-msg success" *ngIf="favoriteSuccess()">{{ favoriteSuccess() }}</p>
+  <p class="favorite-msg error" *ngIf="favoriteError()">{{ favoriteError() }}</p>
+
   <p class="search-tip">💡 <strong>Tip:</strong> Prueba buscando en inglés para obtener resultados más precisos del NIH (ej: <em>headache</em> en lugar de <em>dolor de cabeza</em>).</p>
 
   <div *ngIf="loading()" class="spinner-container">
@@ -39,6 +48,9 @@
         </div>
         <div class="card-footer">
           <a [routerLink]="['/detail', condition.icd10Code]" class="btn-detail">Ver Detalles ➔</a>
+          <button class="btn-save-card" (click)="addConditionToFavorites(condition)">
+            Guardar en favoritos
+          </button>
         </div>
       </div>
     </div>

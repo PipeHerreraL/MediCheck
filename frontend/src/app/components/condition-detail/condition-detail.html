@@ -25,7 +25,9 @@
         <h2>{{ article.title }}</h2>
         <div class="article-meta">
           <span class="source">Fuente: {{ article.source }}</span>
-          <span class="date" *ngIf="article.updated">Actualizado: {{ article.updated | date:'mediumDate' }}</span>
+          <span class="date" *ngIf="article.updated"
+            >Actualizado: {{ article.updated | date: 'mediumDate' }}</span
+          >
         </div>
         <p class="summary">{{ article.summary }}</p>
         <a *ngIf="article.link" [href]="article.link" target="_blank" class="external-link">
@@ -34,9 +36,20 @@
       </article>
     </div>
 
+    <div class="quick-actions" *ngIf="!loading() && !error()">
+      <button class="btn-favorite" (click)="addDetailToFavorites()" [disabled]="favoriteLoading()">
+        {{ favoriteLoading() ? 'Guardando...' : '⭐ Guardar condición en favoritos' }}
+      </button>
+    </div>
+    <p class="favorite-msg success" *ngIf="favoriteSuccess()">{{ favoriteSuccess() }}</p>
+    <p class="favorite-msg error" *ngIf="favoriteError()">{{ favoriteError() }}</p>
+
     <div class="no-data" *ngIf="articles().length === 0">
       <div class="empty-icon">📂</div>
-      <p>No se encontró información detallada adicional para el código <strong>{{ icdCode() }}</strong> en MedlinePlus Connect.</p>
+      <p>
+        No se encontró información detallada adicional para el código
+        <strong>{{ icdCode() }}</strong> en MedlinePlus Connect.
+      </p>
     </div>
   </div>
 </div>
