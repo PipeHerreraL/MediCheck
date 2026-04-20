@@ -17,6 +17,9 @@ export class DrugInfoComponent {
   loading = signal(false);
   error = signal<string | null>(null);
   hasSearched = signal(false);
+  favoriteLoading = signal(false);
+  favoriteError = signal<string | null>(null);
+  favoriteSuccess = signal<string | null>(null);
 
   constructor(private medicalService: MedicalService) {}
 
@@ -40,6 +43,36 @@ export class DrugInfoComponent {
         error: (err) => {
           console.error('Error en búsqueda FDA:', err);
           this.error.set('No se pudo obtener información de la FDA para este medicamento.');
+        }
+      });
+  }
+
+  addDrugToFavorites(): void {
+    const term = this.drugTerm().trim();
+    if (!term) {
+      this.favoriteError.set('Ingresa un medicamento antes de guardarlo en favoritos.');
+      this.favoriteSuccess.set(null);
+      return;
+    }
+
+    this.favoriteLoading.set(true);
+    this.favoriteError.set(null);
+    this.favoriteSuccess.set(null);
+
+    this.medicalService.createFavorito({
+      usuario_id: 1,
+      categoria_id: 3,
+      termino_busqueda: term,
+      notas_usuario: 'Guardado desde consulta de medicamentos.'
+    })
+      .pipe(finalize(() => this.favoriteLoading.set(false)))
+      .subscribe({
+        next: () => {
+          this.favoriteSuccess.set(`"${term}" se guardó en favoritos.`);
+        },
+        error: (err) => {
+          console.error('Error al guardar favorito (medicamentos):', err);
+          this.favoriteError.set(err?.error?.error || 'No se pudo guardar en favoritos.');
         }
       });
   }
