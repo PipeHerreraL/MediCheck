@@ -157,6 +157,119 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Favoritos (PHP)",
+			"item": [
+				{
+					"name": "1. Crear Favorito",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario_id\": 1,\n    \"categoria_id\": 3,\n    \"termino_busqueda\": \"migraña severa\",\n    \"notas_usuario\": \"Buscar más en NIH\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/php_backend/api_favoritos.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"php_backend",
+								"api_favoritos.php"
+							]
+						}
+					}
+				},
+				{
+					"name": "2. Listar Favoritos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/php_backend/api_favoritos.php?usuario_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"php_backend",
+								"api_favoritos.php"
+							],
+							"query": [
+								{
+									"key": "usuario_id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "3. Modificar Favorito",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"notas_usuario\": \"Actualicé mi nota usando PUT\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/php_backend/api_favoritos.php?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"php_backend",
+								"api_favoritos.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "4. Eliminar Favorito",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/php_backend/api_favoritos.php?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"php_backend",
+								"api_favoritos.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
 		}
 	],
 	"variable": [
