@@ -1,6 +1,6 @@
 # 🐘 Micro-Backend PHP (Favoritos)
 
-Este directorio conforma la parte del backend requerida en la entrega universitaria. Está escrita de forma nativa en PHP aprovechando `PDO` (PHP Data Objects) para su comunicación con la base de datos `MySQL`.
+Este directorio conforma la parte del backend requerida. Está escrita de forma nativa en PHP aprovechando `PDO` (PHP Data Objects) para su comunicación con la base de datos `MySQL`.
 
 ## 📦 Estructura
 

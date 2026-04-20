@@ -7,8 +7,7 @@ require_once 'db.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Para simplicidad en servidores sin url rewrite modificado, recibimos el id como parametro $_GET['id'] 
-// para PUT y DELETE.
+// Recibimos el id como parametro $_GET['id'] para PUT y DELETE.
 $id = isset($_GET['id']) ? intval($_GET['id']) : null;
 
 switch ($method) {
@@ -46,7 +45,7 @@ switch ($method) {
             $stmt = $pdo->prepare('INSERT INTO favoritos (usuario_id, categoria_id, termino_busqueda, notas_usuario) VALUES (?, ?, ?, ?)');
             $notas = isset($data->notas_usuario) ? $data->notas_usuario : null;
             $stmt->execute([$data->usuario_id, $data->categoria_id, $data->termino_busqueda, $notas]);
-            
+
             http_response_code(201); // 201 Created requerimiento del anexo
             echo json_encode(['message' => 'Favorito creado exitosamente', 'id' => $pdo->lastInsertId()]);
         } catch (Exception $e) {
@@ -63,7 +62,7 @@ switch ($method) {
             break;
         }
         $data = json_decode(file_get_contents("php://input"));
-        
+
         try {
             // Verificar si existe (Retornar 404 requerimiento anexo)
             $check = $pdo->prepare('SELECT id FROM favoritos WHERE id = ?');
@@ -114,7 +113,7 @@ switch ($method) {
 
             $stmt = $pdo->prepare('DELETE FROM favoritos WHERE id = ?');
             $stmt->execute([$id]);
-            
+
             http_response_code(200);
             echo json_encode(['message' => 'Favorito eliminado']);
         } catch (Exception $e) {
