@@ -1,0 +1,3 @@
+@echo off
+echo Iniciando Servidor PHP en puerto 8000...
+php -d extension=pdo_mysql -S localhost:8000
