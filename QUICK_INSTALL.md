@@ -1,6 +1,6 @@
 # 🚀 Instalación Rápida (Quick Installation)
 
-Si ya cuentas con los requisitos previos (**Node.js**, **PHP** y **MySQL**) y quieres encender el entorno de desarrollo **MediCheck** lo más rápido posible, sigue estos 4 sencillos pasos.
+Si ya cuentas con los requisitos previos (**Node.js**, **PHP** y **MySQL**), sigue estos pasos.
 
 ### 1. Ubícate en el directorio raíz
 Si acabas de descargar o clonar el código, usa una terminal y asegúrate de estar dentro de la carpeta principal del proyecto:
@@ -10,7 +10,7 @@ cd ruta/hacia/tu/carpeta/MediCheck
 
 ### 2. Base de Datos
 1. Inicia tu servidor MySQL (por ejemplo desde XAMPP o nativo).
-2. Asegúrate de tener creada y configurada la base de datos requerida por el backend PHP.
+2. Asegúrate de tener creada y configurada la base de datos requerida por el backend PHP, tendrás el script para crearla en la carpeta `php_backend/database.sql`.
 3. Verifica las variables de entorno para que el Backend tenga conexión (revisa tu archivo `.env`).
 
 ### 3. El Comando Mágico (Instalar todo)
@@ -34,4 +34,4 @@ Abre tu navegador y explora o consume las APIs:
 * 🟢 **Node API**: `http://localhost:3000`
 * 🐘 **PHP API**: `http://localhost:8000`
 
-> *Para terminar la ejecución presiona `Ctrl + C` en la terminal que dejaste abierta y presiona "S" (o "Y") para confirmar la detención de los procesos por lotes.*
+> *Para terminar la ejecución presiona `Ctrl + C` en la terminal que dejaste abierta*
