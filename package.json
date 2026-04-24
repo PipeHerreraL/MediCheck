@@ -7,7 +7,7 @@
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\" \"npm run start:php\"",
     "start:frontend": "cd frontend && npm start",
     "start:backend": "cd backend && npm run dev",
-    "start:php": "cd php_backend && start_php.bat",
+    "start:php": "cd php_backend && php -d extension=pdo_mysql -S localhost:8000",
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install"
   },
   "devDependencies": {
