@@ -69,14 +69,20 @@ Consulta reportes reales de la FDA sobre efectos secundarios.
   - `drug` (string): Nombre del medicamento.
 - **Ejemplo:** `http://localhost:3000/api/drugs/adverse-events?drug=ibuprofen&limit=5`
 
+### 5. Favoritos (Proxy a PHP API)
+Guarda, lee, modifica y borra búsquedas usando Node.js como puente hacia XAMPP.
+- **Rutas:** `POST`, `GET`, `PUT`, `DELETE` en `/favoritos`
+- **Nota:** Requiere la base de datos y que Apache esté corriendo. Más info en `/php_backend/README.md`.
+
 ---
 
 ## 💻 Instalación y Uso
 
-1. **Instalar dependencias:**
+1. **Instalar dependencias y configurar entorno:**
    ```bash
    cd backend
    npm install
+   # Recuerda copiar/renombrar .env.example a .env
    ```
 
 2. **Iniciar servidor en desarrollo:**

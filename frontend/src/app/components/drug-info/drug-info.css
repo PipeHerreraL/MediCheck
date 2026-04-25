@@ -23,6 +23,43 @@
   margin-bottom: 3rem;
 }
 
+.quick-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: -2.2rem;
+  margin-bottom: 1rem;
+}
+
+.btn-favorite {
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  background: #34495e;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-favorite:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.favorite-msg {
+  text-align: center;
+  margin-bottom: 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.favorite-msg.success {
+  color: #1d6f42;
+}
+
+.favorite-msg.error {
+  color: #b42318;
+}
+
 .input-group {
   display: flex;
   align-items: center;

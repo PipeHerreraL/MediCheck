@@ -20,6 +20,14 @@
     </div>
   </div>
 
+  <div class="quick-actions">
+    <button class="btn-favorite" (click)="addDrugToFavorites()" [disabled]="favoriteLoading()">
+      {{ favoriteLoading() ? 'Guardando...' : '⭐ Guardar medicamento en favoritos' }}
+    </button>
+  </div>
+  <p class="favorite-msg success" *ngIf="favoriteSuccess()">{{ favoriteSuccess() }}</p>
+  <p class="favorite-msg error" *ngIf="favoriteError()">{{ favoriteError() }}</p>
+
   <!-- Estados -->
   <div *ngIf="loading()" class="loading-overlay">
     <div class="loader"></div>

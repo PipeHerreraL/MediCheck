@@ -17,6 +17,9 @@ const config = {
 
   // Puerto del servidor
   port: process.env.PORT || 3000,
+
+  // URL del backend de favortios en PHP local
+  phpBackendUrl: process.env.PHP_BACKEND_URL || 'http://localhost/php_backend/api_favoritos.php',
 };
 
 module.exports = config;
